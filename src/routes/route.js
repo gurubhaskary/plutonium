@@ -31,7 +31,9 @@ router.get("/movies/:indexNumber", function(req, res){
 router.get("/shoes", function(req, res){
     let queryParams = req.query
     let brand = queryParams.brand
-    res.send("dummy response")
+   
+   res.send("dummy response")
+
 })
 
 // uses query params
@@ -45,6 +47,7 @@ router.get('/candidates', function(req, res){
     console.log('District is '+district)
     let candidates = ['Akash','Suman']
     res.send(candidates)
+    // res.send(district,gender,district)
 })
 
 // use path param
@@ -103,5 +106,146 @@ router.get("/films/:filmId", function(req, res){
        res.send("The film id doesn't match any movie")
 })
 
+//Assignment
+
+router.get("/sol1", function (req, res) {
+    //logic : sum of numbers is n(n+1)/2..so get sum of all numbers in array. now take sum of numbers till last digit in the array
+    let arr= [1,2,3,5,6,7];
+    ///LOGIC WILL GO HERE 
+    let n = arr.length;
+    const total=arr.reduce((sum,x)=>sum+x);
+    for(let i=0;i<n;i++){
+        if(i==n-1)
+        {
+            nvalue=arr[i]
+        }
+    }
+    
+      let missingNumber= ((nvalue*(nvalue+1))/2)-total;  
+    
+    // console.log(nvalue)
+    res.send({data:missingNumber});
+    
+});
+
+
+router.get("/sol2", function (req, res) {
+    // logic : sum of n consecutive numbers is [ n * (first + last) / 2  ]..so get sum of all numbers in array. now take sum of n consecutive numbers.. n would be length+1 as 1 number is missing
+    let arr= [33, 34, 35, 37, 38]
+    let n = arr.length;
+    let first=0;
+    let last=0;
+    // const total=arr.reduce((sum,x)=>sum+x);
+     for(let i=0;i<n;i++){
+        if(i==n-1)
+        {
+            last=arr[i]
+        }
+        else if(i==0)
+        {
+            first=arr[i]
+        }
+    }
+    ///LOGIC WILL GO HERE 
+    let missingNumber= ((((n+1)*(first + last))+1)/2)-((n*(first + last))/2);
+    res.send(  { data: missingNumber  }  );
+});
+
+// ========================================================
+//rest post method
+
+    let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ]
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ]
+       },
+   ]
+
+   router.post('/players', function (req, res) {
+    //LOGIC WILL COME HERE
+    let flag=0;
+    for(let i=0;i<players.length;i++){
+    if(players[i].name===req.body.name)
+    {
+        flag=1;
+        break;
+    }
+}
+    
+    if(flag==0){
+        players.push(req.body)
+        res.send(  { data: players , status: true }  )
+    }
+    else if(flag==1){
+        res.send(  "Player name already exists"  )
+    }
+});
+
+//Second Assignment
+
+let persons =
+[
+    {
+        "name": "pk",
+        age: 10,
+        votingstatus:false 
+    },
+    {
+        "name": "sk",
+        age: 20,
+        votingstatus:false
+    },
+    {
+        "name": "aa",
+        age: 70,
+        votingstatus:false
+    },
+    {
+        "name": "ss",
+        age: 5,
+        votingstatus:false
+    },
+    {
+        "name": "Ho",
+        age: 40,
+        votingstatus: false
+    },
+]
+router.post("/vote",function(req,res){
+    let eligible=[];
+    for(let i=0;i<persons.length;i++){
+        if(persons[i].age>req.query.votingage){
+            persons[i].votingstatus=true;
+            eligible.push(persons[i]);
+        }
+    }
+    res.send(eligible);
+    
+   
+});
 module.exports = router;
 // adding this comment for no reason
