@@ -21,20 +21,30 @@ const getBooksInYear= async function (req, res) {
      res.send({msg: BookYear})
 }
 
-const getParticularBooks= async function (req, res) {
-    let value = req.query.input;
-     let ParticularBooks = await BookDetailsModel.find({
-        $or: [{bookName: value},{totalPages:value},{stockAvailable:value},{price:value},{year:value },{tags:value },{authorName:value }]
-    })
+// const getParticularBooks= async function (req, res) {
+//     let value = req.query.input;
+//      let ParticularBooks = await BookDetailsModel.find({
+//         // $or: [{bookName: value},{totalPages:value},{stockAvailable:value},{price:value},{year:value },{tags:value },{authorName:value }]
+//         $in: [{bookName: value},{totalPages:value},{stockAvailable:value},{price:value},{year:value },{tags:value },{authorName:value }]
+//     })
    
-     res.send({msg: ParticularBooks})
-}
-
-
-// const getXINRBooks= async function (req, res) {
-//     let InrBooks= await BookDetailsModel.find({price.indianPrice : { $in: ["100INR", "200INR", "500INR"] }  })
-//    res.send({msg:InrBooks })
+//      res.send({msg: ParticularBooks})
 // }
+
+const getParticularBooks= async function (req, res) {
+    let obj = req.body
+    let ParticularBooks =await BookDetailsModel.find({obj})
+    // let key= Object.keys(obj)[0];
+    // let value=obj[key]
+    // let ParticularBooks =await BookDetailsModel.find({[key]:value})
+    res.send({msg: ParticularBooks})
+    }
+
+
+const getXINRBooks= async function (req, res) {
+    let InrBooks= await BookDetailsModel.find({"price.indianPrice" : { $in: ["100INR", "200INR", "500INR"] }  })
+   res.send({msg:InrBooks })
+}
 
 const getRandomBooks= async function (req, res) {
     let RandomBooks= await BookDetailsModel.find({
@@ -48,6 +58,6 @@ module.exports.createBookDetails= createBookDetails
 module.exports.bookList = bookList 
 module.exports.getBooksInYear = getBooksInYear 
 module.exports.getParticularBooks = getParticularBooks 
-// module.exports.getXINRBooks = getXINRBooks 
+module.exports.getXINRBooks = getXINRBooks 
 module.exports.getRandomBooks  = getRandomBooks  
-//fwds
+
