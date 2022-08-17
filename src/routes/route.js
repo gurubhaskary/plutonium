@@ -7,6 +7,7 @@ const BookController= require("../controllers/bookController")
 const BookDetailsController= require("../controllers/bookDetailsController")
 
 
+
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
@@ -30,6 +31,8 @@ router.post("/getBooksInYear", BookDetailsController.getBooksInYear)
 router.post("/getParticularBooks", BookDetailsController.getParticularBooks)
 
 router.get("/getXINRBooks", BookDetailsController.getXINRBooks)
- 
 router.get("/getRandomBooks", BookDetailsController.getRandomBooks)
+
+
+
 module.exports = router;
