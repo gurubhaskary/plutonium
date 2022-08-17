@@ -4,6 +4,10 @@ const router = express.Router();
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
 
+//Assignment 17/August/2022
+const AuthorBookControler = require("../controllers/AuthorBookControler")
+
+
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
@@ -37,5 +41,14 @@ router.get("/dateManipulations", function (req, res) {
 
     res.send({ msg: "all good"})
 })
+
+
+
+//Assignment 17/August/2022
+router.post("/AuthorcreateDetails", AuthorBookControler.AuthorcreateDetails)
+router.post("/BookcreateDetails", AuthorBookControler.BookcreateDetails)
+router.get("/GetauthorID", AuthorBookControler.GetauthorID)
+router.get("/updatePrice", AuthorBookControler.updatePrice)
+router.get("/GreatPrice", AuthorBookControler.GreatPrice)
 
 module.exports = router;
