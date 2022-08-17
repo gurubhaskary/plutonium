@@ -21,6 +21,8 @@ const getBooksInYear= async function (req, res) {
      res.send({msg: BookYear})
 }
 
+
+
 // const getParticularBooks= async function (req, res) {
 //     let value = req.query.input;
 //      let ParticularBooks = await BookDetailsModel.find({
@@ -32,12 +34,16 @@ const getBooksInYear= async function (req, res) {
 // }
 
 const getParticularBooks= async function (req, res) {
-    let obj = req.body
-    let ParticularBooks =await BookDetailsModel.find({obj})
+    // =========
+    
+    let ParticularBooks =await BookDetailsModel.find(req.body)
+    // ============
+    
+    // let obj = req.body
     // let key= Object.keys(obj)[0];
     // let value=obj[key]
     // let ParticularBooks =await BookDetailsModel.find({[key]:value})
-    res.send({msg: ParticularBooks})
+    // res.send({msg: ParticularBooks})
     }
 
 
