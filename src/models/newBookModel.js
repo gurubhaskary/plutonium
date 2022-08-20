@@ -6,14 +6,14 @@ const NewBookSchema = new mongoose.Schema( {
     author_id: {
         type: ObjectId,
         required:true,
-        ref: "newAuthor"
+        ref: "NewAuthorDataBase"
     }, 
     price: Number,
     ratings: Number,
     publisher: {
         type: ObjectId,
         required:true,
-        ref: "newPublisher"
+        ref: "NewPublisherDataBase"
     },
     isHardCover:{
         type:Boolean,
@@ -24,4 +24,4 @@ const NewBookSchema = new mongoose.Schema( {
 
 
 
-module.exports = mongoose.model('NewBookDataBase', bookSchema)
+module.exports = mongoose.model('NewBookDataBase', NewBookSchema)

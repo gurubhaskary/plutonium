@@ -8,8 +8,7 @@ const NewPublisherSchema = new mongoose.Schema( {
     unique:true
 },
 headQuarter: String,
-isHardCover :Boolean
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('NewPublisherDataBase', NewAuthorSchema)
+module.exports = mongoose.model('NewPublisherDataBase', NewPublisherSchema)

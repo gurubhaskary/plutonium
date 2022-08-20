@@ -3,9 +3,6 @@ const NewPublisherModel= require("../models/newPublisherModel")
 const NewAuthorModel= require("../models/newAuthorModel")
 
 
-
-
-
 let createNewBook = async function (req, res) {
     let book = req.body
     let authorId = book.author_id
