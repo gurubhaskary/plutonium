@@ -34,16 +34,24 @@ const updatePrice= async function (req, res) {
 
 const GreatPrice= async function (req, res) {
     
-    let bet= await BookModel.find( { price : { $gte: 50, $lte: 100} } ).select({ author_id :1,_id:0})
-    
-    let authorName= await AuthorModel.find()
-    let Auth=[]
-        for(let i=0;i<bet.length;i++){
-            Auth[i]= await AuthorModel.find({author_id:{$eq:bet[i].author_id}}).select({author_name :1,_id:0})
+   
+    let a= await BookModel.find( { price : { $gte: 50, $lte: 100} } )
+        let b = a.map(x=>x.author_id);
+        let newRan=await AuthorModel.find({author_id:b}).select({author_name :1,_id:0});
+    res.send({msg:newRan})
+
+    // ============================================Ignore==========================
+
+    // let bet= await BookModel.find( { price : { $gte: 50, $lte: 100} } ).select({ author_id :1,_id:0})
+    // let authorName= await AuthorModel.find()
+    // let Auth=[]
+    //     for(let i=0;i<bet.length;i++){
+    //         Auth[i]= await AuthorModel.find({author_id:{$eq:bet[i].author_id}}).select({author_name :1,_id:0})
             
-        }
-        // var unique = Auth.filter((v, i, a) => a.indexOf(v) === i);
-    res.send({msg:Auth})
+    //     }
+    //     // var unique = Auth.filter((v, i, a) => a.indexOf(v) === i);
+// res.send({msg:Auth})
+        // ===================Ignore================
 }
 
 module.exports.AuthorcreateDetails= AuthorcreateDetails
