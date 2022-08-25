@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 // const UserModel= require("../models/userModel.js")
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
@@ -58,5 +59,11 @@ router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.
 
 
 
+
+//Assignment-----24/August/2022
+const TimeController=require('../controllers/TimeController')
+router.get("/AssignmentTimeCode", commonMW.mid1,TimeController.AssignmentTimeCode)
+router.get("/AssignmentDateTimeCodePath")
+// router.get("/basicRoute", commonMW.mid1,UserController.basicCode)
 
 module.exports = router;

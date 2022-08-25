@@ -1,6 +1,5 @@
+const mongoose = require('mongoose');
 const UserModel= require("../models/userModel")
-
-
 
 
 const basicCode= async function(req, res) {
@@ -11,9 +10,6 @@ const basicCode= async function(req, res) {
     console.log( "hey man, congrats you have reached the Handler")
     res.send({ msg: "This is coming from controller (handler)"})
     }
-
-
-
 
 
 
