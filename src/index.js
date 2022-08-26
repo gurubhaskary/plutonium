@@ -18,12 +18,12 @@ mongoose.connect("mongodb+srv://syguru82sun:Roll123@cluster0.btfeueg.mongodb.net
 
 app.use('/', route);
 
-app.use (
-    function (req, res, next) {
-        console.log ("inside GLOBAL MW");
-        res.send({msg:"done"})
-  }
-  );
+// app.use (
+//     function (req, res, next) {
+//         console.log ("inside GLOBAL MW");
+//         res.send({msg:"done"})
+//   }
+//   );
 
 
 app.listen(process.env.PORT || 3000, function () {
