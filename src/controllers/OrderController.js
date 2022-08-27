@@ -46,13 +46,17 @@ arruserId.forEach(element => {
             return res.send("You dont have balance to Buy the Product")
         }
         else{
-            let OrderCreated = await orderModel.create(order)
-            let end=money[0].balance-price[0].price
+            
+            // let end=money[0].balance-price[0].price
+            
             let updateUser=await userProductModel.findByIdAndUpdate({_id:uId},{$inc:{balance:-price[0].price}},{new:true}).select({balance:1,_id:0})
-            console.log(updateUser)
-            const allOrders = await orderModel.find().populate(['userId', 'productId'])
-            console.log(OrderCreated)
-              return res.send(allOrders)
+            // console.log(updateUser)
+            order.amount=price[0].price
+            order.isFreeAppUser=freeApp
+            let OrderCreated = await orderModel.create(order)
+            // const allOrders = await orderModel.find().populate(['userId', 'productId'])
+            // console.log(allOrders)
+              return res.send(OrderCreated)
         }
     }
     else if(freeApp=='true'){
