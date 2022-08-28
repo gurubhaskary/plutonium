@@ -17,14 +17,16 @@ const userController= require("../controllers/userController")
 
 
 //Assignment 26/August/2022
-router.post("/users", userController.createUser  )
+const middleWare = require("../MiddleWare/auth")
 
-router.post("/login", userController.loginUser)
+router.post("/users",userController.createUser  )
 
-router.get("/users/:userId", userController.getUserData)
+router.post("/login",userController.loginUser)
 
-router.put("/users/:userId", userController.updateUser)
+router.get("/users/:userId",middleWare.Validate, userController.getUserData)
 
-// router.put("/users/:userId", userController.updateUser)
+router.put("/users/:userId",middleWare.Validate, userController.updateUser)
+
+router.put("/DeleteUsers/:userId",middleWare.Validate,userController.deleteUser)
 
 module.exports = router;
