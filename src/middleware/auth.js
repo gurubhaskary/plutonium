@@ -31,7 +31,10 @@ const authorise = function(req, res, next) {
   
     let userToModify=req.params.userId
     let userToLoggedIn=req.decodedToken.userId
-    if(userToModify!=userToLoggedIn) return res.send({msg:"User Has No Access to the Collection"})
+    if(userToModify!=userToLoggedIn) 
+    {
+      return res.send({msg:"User Has No Access to the Collection"})
+}
     next()
 }
 
