@@ -2,9 +2,17 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
 const createUser = async function (req, res) {
-  let data = req.body;
-  let savedData = await userModel.create(data);
-  res.send({ msg: savedData });
+  try {
+    let data = req.body;
+    if (Object.keys(data).length != 0) {
+      let savedData = await BookModel.create(data)
+      res.status(201).send({ msg: savedData })
+    }
+    else res.status(400).send({ msg: "BAD REQUEST" })
+  }
+  catch (error) {
+    res.status(500).send({ error: err.message })
+  }
 };
 
 const loginUser = async function (req, res) {
@@ -12,11 +20,14 @@ const loginUser = async function (req, res) {
   let password = req.body.password;
 
   let user = await userModel.findOne({ emailId: userName, password: password });
+  //User Is notavialblethen 404 Error
   if (!user)
-    return res.send({
+    return res.status(404).send({
       status: false,
       msg: "username or the password is not corerct",
     });
+
+
   let token = jwt.sign(
     {
       userId: user._id.toString(),
@@ -29,28 +40,54 @@ const loginUser = async function (req, res) {
   res.send({ status: true, data: token });
 };
 
-const getUserData = async function (req,res) {
+const getUserData = async function (req, res) {
+  if(userDetails){
   console.log(req.userDetails)
-  // res.send({ status: true, data: req.userDetails });
-  
+  res.status(201).send({ status: true, data: req.userDetails });
+  }
+  else{
+    return res.status(404).send({ status: false, msg: "No such user exists" });
+  }
+
 };
 
 
 
 const updateUser = async function (req, res) {
-  let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: req.userId }, userData);
-  res.send({ status: updatedUser, data: updatedUser });
- 
+  try {
+    let userData = req.body;
+    let updatedUser = await userModel.findOneAndUpdate({ _id: req.userId }, userData);
+    if(updatedUser){
+    res.status(201).send({ status: updatedUser, data: updatedUser });
+    }
+    else{
+      res.status(404).send("User isnot found to update")
+    }
+  }
+  catch (error) {
+    
+    res.status(500).send("SERVER ERROR")
+  }
 };
 
 const deleteUser = async function (req, res) {
-  let userId = req.params.userId;
-    let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, {$set:{isDeleted:true}},{new:true});
-    res.send({ status: true, data: updatedUser });
-  };
+  try {
+    let userId = req.params.userId;
+    let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, { $set: { isDeleted: true } }, { new: true });
+    if(updatedUser){
+    res.status(201).send({ status: true, data: updatedUser });
+  }
+  else{
+    res.status(404).send("User isnot found to update")
+  }
+  }
+  catch (error) {
+    
+    res.status(500).send("SERVER ERROR")
+  }
+};
 
-  
+
 
 
 module.exports.createUser = createUser;
