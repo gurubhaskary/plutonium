@@ -26,6 +26,8 @@ const weatherController=require("../controllers/weatherController")
 router.get("/londonWeather", weatherController.londonWeather) //London Weather
 router.get("/londonTemperature", weatherController.londonTemperature) //London Temperature
 router.get("/citySorted", weatherController.citySorted) //Sorting City
-router.get("/citySorted", memeController.Meme) //Meme Api
+
+const memeController=require("../controllers/memeController")
+router.post("/Meme", memeController.Meme) //Meme Api
 
 module.exports = router;

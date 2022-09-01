@@ -49,8 +49,8 @@ try{
         cityObj.push(obj)
     }
 
-    // let sorted= cityObj.sort(function(a,b){ return a.temp - b.temp})
-    let sorted= cityObj.sort()
+    let sorted= cityObj.sort(function(a,b){ return a.temp - b.temp})
+    // let sorted= cityObj.sort()
     res.status(200).send({ msg: sorted })
 }
 catch (err) {
