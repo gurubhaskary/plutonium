@@ -27,4 +27,7 @@ router.get("/authusers/:userId",middleWare.authenticate,middleWare.authorise,aut
 router.put("/authusers/:userId",middleWare.authenticate, middleWare.authorise,authcontroller.updateUser)
 router.put('/Deleteauthusers/:userId',middleWare.authenticate,middleWare.authorise, authcontroller.deleteUser)
 
+
+
+
 module.exports = router;
